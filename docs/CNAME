@@ -1,0 +1,8 @@
+# GitHub Pages Custom Domain (Optional)
+# 
+# If you want to use a custom domain like pokercounter.com:
+# 1. Uncomment the line below and replace with your domain
+# 2. Configure DNS settings with your domain registrar
+# 3. Enable HTTPS in GitHub Pages settings
+#
+# pokercounter.com

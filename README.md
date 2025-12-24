@@ -15,7 +15,15 @@ This project implements a computer vision solution to detect and count poker chi
 - 💰 Stack valuation
 - 📱 Mobile app integration (iOS/Android)
 
-## 🎨 Detected Chip Colors
+## � Website & Documentation
+
+**Live Website:** https://ianyian.github.io/readmyobject/
+
+- 📄 [Privacy Policy](https://ianyian.github.io/readmyobject/privacy-policy.html)
+- 💡 [Support & Help](https://ianyian.github.io/readmyobject/support.html)
+- 📱 [Download on App Store](#) *(coming soon)*
+
+## �🎨 Detected Chip Colors
 
 | Color         | Description                   |
 | ------------- | ----------------------------- |
