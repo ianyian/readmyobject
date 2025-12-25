@@ -21,7 +21,7 @@ This project implements a computer vision solution to detect and count poker chi
 
 - 📄 [Privacy Policy](https://ianyian.github.io/readmyobject/privacy-policy.html)
 - 💡 [Support & Help](https://ianyian.github.io/readmyobject/support.html)
-- 📱 [Download on App Store](#) *(coming soon)*
+- 📱 [Download on App Store](#) _(coming soon)_
 
 ## �🎨 Detected Chip Colors
 

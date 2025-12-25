@@ -5,6 +5,7 @@ This folder contains the GitHub Pages website for Poker Chip Counter.
 ## 🌐 Live Website
 
 Once you enable GitHub Pages, your site will be available at:
+
 ```
 https://ianyian.github.io/readmyobject/
 ```
@@ -20,6 +21,7 @@ https://ianyian.github.io/readmyobject/
 ## 🚀 How to Enable GitHub Pages
 
 ### Step 1: Push to GitHub
+
 ```bash
 cd /Users/xj/git/readmyobject
 git add docs/
@@ -28,6 +30,7 @@ git push origin main
 ```
 
 ### Step 2: Enable in Repository Settings
+
 1. Go to https://github.com/ianyian/readmyobject
 2. Click **Settings** (gear icon)
 3. Scroll down to **Pages** in the left sidebar
@@ -38,6 +41,7 @@ git push origin main
 6. Wait 1-2 minutes for deployment
 
 ### Step 3: Verify
+
 Visit: https://ianyian.github.io/readmyobject/
 
 You should see your app's homepage!
@@ -47,16 +51,19 @@ You should see your app's homepage!
 Once GitHub Pages is live, use these URLs in App Store Connect:
 
 ### Privacy Policy URL
+
 ```
 https://ianyian.github.io/readmyobject/privacy-policy.html
 ```
 
 ### Support URL
+
 ```
 https://ianyian.github.io/readmyobject/support.html
 ```
 
 ### Marketing URL (Optional)
+
 ```
 https://ianyian.github.io/readmyobject/
 ```
@@ -64,23 +71,30 @@ https://ianyian.github.io/readmyobject/
 ## 🎨 Customization
 
 ### Update Contact Information
+
 Replace `[Your Email]` in:
+
 - support.html (multiple places)
 - privacy-policy.html
 
 ### Update App Store Link
+
 Once your app is approved, update the App Store link in:
+
 - index.html (line ~68): Replace `https://apps.apple.com` with your actual App Store URL
 
 ### Add Custom Domain (Optional)
+
 If you own a domain like `pokercounter.com`:
 
 1. **Update CNAME file:**
+
    ```
    pokercounter.com
    ```
 
 2. **Configure DNS with your domain registrar:**
+
    - Add A records pointing to GitHub Pages IPs:
      - 185.199.108.153
      - 185.199.109.153
@@ -113,12 +127,17 @@ To add Google Analytics:
 
 ```html
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-XXXXXXXXXX");
 </script>
 ```
 
@@ -143,17 +162,20 @@ After enabling GitHub Pages:
 ## 🐛 Troubleshooting
 
 ### Site Not Loading
+
 - Make sure repository is public
 - Check Settings → Pages is configured correctly
 - Wait 5-10 minutes after enabling
 - Try clearing browser cache
 
 ### 404 Errors
+
 - Verify files are in `/docs` folder
 - Check file names are correct (case-sensitive)
 - Ensure `index.html` exists
 
 ### Updates Not Showing
+
 - Clear browser cache
 - Wait 1-2 minutes after pushing changes
 - Try incognito/private browsing mode
@@ -162,6 +184,7 @@ After enabling GitHub Pages:
 ## 🎉 Success!
 
 Once GitHub Pages is live:
+
 1. Your privacy policy and support pages are publicly accessible
 2. You can use these URLs in App Store Connect
 3. Users can visit your app's website

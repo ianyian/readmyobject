@@ -58,6 +58,33 @@ struct LiveDetectionView: View {
                             Spacer()
                         }
                         
+                        // Live detection labels - left center
+                        HStack {
+                            if !viewModel.isPaused && !viewModel.currentDetections.isEmpty {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    ForEach(viewModel.currentDetections.prefix(5), id: \.label) { detection in
+                                        HStack(spacing: 8) {
+                                            Text(detection.label)
+                                                .font(.caption.weight(.semibold))
+                                            Text("\(detection.count)")
+                                                .font(.caption.weight(.bold))
+                                                .padding(.horizontal, 6)
+                                                .padding(.vertical, 2)
+                                                .background(Color.green)
+                                                .cornerRadius(4)
+                                        }
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 6)
+                                        .background(Color.black.opacity(0.7))
+                                        .cornerRadius(8)
+                                    }
+                                }
+                                .padding(.leading, 16)
+                            }
+                            Spacer()
+                        }
+                        
                         // Pause indicator in center
                         if viewModel.isPaused {
                             Spacer()
@@ -214,38 +241,67 @@ struct DetectionChartView: View {
             Divider()
                 .padding(.horizontal)
             
-            // CPU Usage Header
+            // CPU & Memory Usage Header
             HStack {
-                Text("CPU Usage")
+                Text("Performance")
                     .font(.subheadline.weight(.semibold))
                 Spacer()
-                Text(String(format: "%.1f%%", viewModel.currentCPUUsage))
-                    .font(.subheadline.weight(.bold))
-                    .foregroundColor(.orange)
+                HStack(spacing: 12) {
+                    HStack(spacing: 4) {
+                        Rectangle()
+                            .fill(Color.orange)
+                            .frame(width: 12, height: 2)
+                        Text("CPU")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                        Text(String(format: "%.1f%%", viewModel.currentCPUUsage))
+                            .font(.caption.weight(.bold))
+                            .foregroundColor(.orange)
+                    }
+                    HStack(spacing: 4) {
+                        VStack(spacing: 1) {
+                            Rectangle()
+                                .fill(Color.cyan.opacity(0.2))
+                                .frame(width: 8, height: 3)
+                            Rectangle()
+                                .fill(Color.cyan.opacity(0.6))
+                                .frame(width: 8, height: 5)
+                        }
+                        .cornerRadius(1)
+                        Text("MEM")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                        Text(String(format: "%.1f%%", viewModel.currentMemoryUsage))
+                            .font(.caption.weight(.bold))
+                            .foregroundColor(.cyan)
+                    }
+                }
             }
             .padding(.horizontal)
             
             // CPU Line Chart with Y-axis
             GeometryReader { geometry in
                 HStack(spacing: 4) {
-                    // Y-axis labels
+                    // Y-axis labels (always 0-100%)
                     VStack(spacing: 0) {
-                        Text(String(format: "%.0f%%", viewModel.cpuMaxScale))
+                        Text("100%")
                             .font(.system(size: 8))
                             .foregroundColor(.secondary)
+                            .frame(height: 8)
                         Spacer()
-                        Text(String(format: "%.0f%%", viewModel.cpuMaxScale / 2))
+                        Text("50%")
                             .font(.system(size: 8))
                             .foregroundColor(.secondary)
                         Spacer()
                         Text("0%")
                             .font(.system(size: 8))
                             .foregroundColor(.secondary)
+                            .frame(height: 8)
                     }
-                    .frame(width: 30, height: geometry.size.height * 0.45)
+                    .frame(width: 30, height: geometry.size.height * 0.45, alignment: .center)
                     
                     // Chart area
-                    ZStack {
+                    ZStack(alignment: .bottom) {
                         // Background grid lines
                         VStack(spacing: 0) {
                             Divider().opacity(0.3)
@@ -254,26 +310,45 @@ struct DetectionChartView: View {
                             Spacer()
                             Divider().opacity(0.3)
                         }
-                        .frame(height: geometry.size.height * 0.45)
+                        .frame(height: geometry.size.height * 0.45, alignment: .center)
                         
-                        // Scrollable chart
+                        // Scrollable chart with Memory (bars) and CPU (line)
                         ScrollViewReader { proxy in
                             ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(alignment: .bottom, spacing: 0) {
-                                    ForEach(viewModel.cpuHistory.indices.reversed(), id: \.self) { index in
-                                        CPULineSegment(
-                                            current: viewModel.cpuHistory[index],
-                                            next: index > 0 ? viewModel.cpuHistory[index - 1] : nil,
-                                            maxHeight: geometry.size.height * 0.45,
-                                            maxValue: viewModel.cpuMaxScale
-                                        )
-                                        .frame(width: 30)
-                                        .id(index)
+                                ZStack(alignment: .bottom) {
+                                    // Memory bars in background
+                                    HStack(alignment: .bottom, spacing: 0) {
+                                        ForEach(viewModel.memoryHistory.indices.reversed(), id: \.self) { index in
+                                            MemoryBarView(
+                                                usage: viewModel.memoryHistory[index],
+                                                maxHeight: geometry.size.height * 0.45,
+                                                maxValue: viewModel.cpuMaxScale
+                                            )
+                                        }
                                     }
+                                    .frame(height: geometry.size.height * 0.45, alignment: .bottom)
+                                    .padding(.horizontal, 8)
+                                    .scaleEffect(x: -1, y: 1)
+                                    
+                                    // CPU line in foreground
+                                    HStack(alignment: .bottom, spacing: 0) {
+                                        ForEach(viewModel.cpuHistory.indices.reversed(), id: \.self) { index in
+                                            CPULineSegment(
+                                                current: viewModel.cpuHistory[index],
+                                                next: index > 0 ? viewModel.cpuHistory[index - 1] : nil,
+                                                maxHeight: geometry.size.height * 0.45,
+                                                maxValue: viewModel.cpuMaxScale
+                                            )
+                                            .id(index)
+                                        }
+                                    }
+                                    .frame(height: geometry.size.height * 0.45, alignment: .bottom)
+                                    .padding(.horizontal, 8)
+                                    .scaleEffect(x: -1, y: 1)
                                 }
-                                .padding(.horizontal, 8)
-                                .scaleEffect(x: -1, y: 1)
+                                .frame(height: geometry.size.height * 0.45, alignment: .bottom)
                             }
+                            .frame(height: geometry.size.height * 0.45)
                             .scaleEffect(x: -1, y: 1)
                             .onChange(of: viewModel.cpuHistory.count) { _ in
                                 if let lastIndex = viewModel.cpuHistory.indices.last {
@@ -284,6 +359,7 @@ struct DetectionChartView: View {
                             }
                         }
                     }
+                    .frame(height: geometry.size.height * 0.45)
                 }
             }
             .padding(.bottom, 8)
@@ -354,29 +430,61 @@ struct CPULineSegment: View {
     let maxValue: Double
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .bottom) {
-                let currentHeight = min(maxHeight, maxHeight * CGFloat(current / maxValue))
+        ZStack(alignment: .bottom) {
+            let currentHeight = maxHeight * CGFloat(current / maxValue)
+            
+            // Line to next point (no fill, just clean line)
+            if let next = next {
+                let nextHeight = maxHeight * CGFloat(next / maxValue)
                 
-                // Line to next point (no fill, just clean line)
-                if let next = next {
-                    let nextHeight = min(maxHeight, maxHeight * CGFloat(next / maxValue))
-                    
-                    // Main line only
-                    Path { path in
-                        path.move(to: CGPoint(x: 0, y: geometry.size.height - currentHeight))
-                        path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height - nextHeight))
-                    }
-                    .stroke(Color.green, style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
-                } else {
-                    // Last point - just a small indicator
-                    Circle()
-                        .fill(Color.green)
-                        .frame(width: 4, height: 4)
-                        .offset(y: -currentHeight)
+                // Main line only
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: maxHeight - currentHeight))
+                    path.addLine(to: CGPoint(x: 30, y: maxHeight - nextHeight))
                 }
+                .stroke(Color.orange, style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+            } else {
+                // Last point - just a small indicator
+                Circle()
+                    .fill(Color.orange)
+                    .frame(width: 4, height: 4)
+                    .offset(y: -currentHeight)
             }
         }
+        .frame(width: 30, height: maxHeight, alignment: .bottom)
+    }
+}
+
+// MARK: - Memory Bar View
+struct MemoryBarView: View {
+    let usage: Double // Memory usage percentage (0-100)
+    let maxHeight: CGFloat
+    let maxValue: Double // Always 100 for percentage scale
+    
+    var body: some View {
+        // Memory bar always shows full height (100% total memory capacity)
+        // Bottom portion: Used memory (darker cyan)
+        // Top portion: Available memory (lighter cyan)
+        let usedPercentage = usage / 100.0
+        
+        VStack(spacing: 0) {
+            // Available memory (top, lighter cyan)
+            Rectangle()
+                .fill(Color.cyan.opacity(0.15))
+            
+            // Used memory (bottom, darker cyan with gradient)
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        colors: [Color.cyan.opacity(0.7), Color.cyan.opacity(0.5)],
+                        startPoint: .bottom,
+                        endPoint: .top
+                    )
+                )
+                .frame(height: maxHeight * CGFloat(usedPercentage))
+        }
+        .frame(width: 30, height: maxHeight, alignment: .bottom)
+        .cornerRadius(2)
     }
 }
 
@@ -388,7 +496,10 @@ class LiveDetectionViewModel: ObservableObject {
     @Published var cpuHistory: [Double] = []
     @Published var currentCPUUsage: Double = 0.0
     @Published var cpuMaxScale: Double = 10.0
+    @Published var memoryHistory: [Double] = []
+    @Published var currentMemoryUsage: Double = 0.0
     @Published var isPaused: Bool = false
+    @Published var currentDetections: [(label: String, count: Int)] = []
     
     let captureSession = AVCaptureSession()
     private var videoOutput = AVCaptureVideoDataOutput()
@@ -422,10 +533,10 @@ class LiveDetectionViewModel: ObservableObject {
         }
         
         // Load standard model
-        if let standardModelURL = Bundle.main.url(forResource: "yolov8n", withExtension: "mlmodelc"),
+        if let standardModelURL = Bundle.main.url(forResource: "yolov8l", withExtension: "mlmodelc"),
            let mlModel = try? MLModel(contentsOf: standardModelURL, configuration: config) {
             standardModel = try? VNCoreMLModel(for: mlModel)
-            print("✅ Loaded standard model for live detection")
+            print("✅ Loaded YOLOv8-Large model for live detection")
         }
     }
     
@@ -495,8 +606,8 @@ class LiveDetectionViewModel: ObservableObject {
     }
     
     private func startCPUMonitoring() {
-        // Monitor CPU every 0.5 seconds independently of detection
-        cpuMonitorTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+        // Monitor CPU every 1.0 second independently of detection
+        cpuMonitorTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.updateCPUUsage()
         }
     }
@@ -509,16 +620,10 @@ class LiveDetectionViewModel: ObservableObject {
         
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
         
-        // Use appropriate model(s) based on mode
-        if detectionMode == .allObjects {
-            // Run both models
-            detectWithBothModels(ciImage: ciImage)
-        } else {
-            // Run single model
-            let model = detectionMode == .pokerChips ? chipModel : standardModel
-            guard let model = model else { return }
-            detectWithSingleModel(ciImage: ciImage, model: model)
-        }
+        // Use appropriate single model based on mode
+        let model = detectionMode == .pokerChips ? chipModel : standardModel
+        guard let model = model else { return }
+        detectWithSingleModel(ciImage: ciImage, model: model)
     }
     
     func shouldProcessFrame() -> Bool {
@@ -550,41 +655,11 @@ class LiveDetectionViewModel: ObservableObject {
         try? handler.perform([request])
     }
     
-    private func detectWithBothModels(ciImage: CIImage) {
-        var allResults: [VNRecognizedObjectObservation] = []
-        let group = DispatchGroup()
-        
-        if let standardModel = standardModel {
-            group.enter()
-            let request = VNCoreMLRequest(model: standardModel) { request, error in
-                defer { group.leave() }
-                if let results = request.results as? [VNRecognizedObjectObservation] {
-                    allResults.append(contentsOf: results)
-                }
-            }
-            request.imageCropAndScaleOption = .scaleFill
-            let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
-            try? handler.perform([request])
-        }
-        
-        if let chipModel = chipModel {
-            group.enter()
-            let request = VNCoreMLRequest(model: chipModel) { request, error in
-                defer { group.leave() }
-                if let results = request.results as? [VNRecognizedObjectObservation] {
-                    allResults.append(contentsOf: results)
-                }
-            }
-            request.imageCropAndScaleOption = .scaleFill
-            let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
-            try? handler.perform([request])
-        }
-        
-        group.notify(queue: .main) { [weak self] in
-            guard let self = self else { return }
-            self.processDetectionResults(allResults)
-        }
-    }
+    // REMOVED: detectWithBothModels - No longer merging models
+    // Each mode now uses only its appropriate model:
+    // - "All Objects" → YOLOv8 COCO standard model only
+    // - "Poker Chips" → Custom poker chip model only
+    // - Other modes → YOLOv8 COCO standard model only
     
     @MainActor
     private func processDetectionResults(_ results: [VNRecognizedObjectObservation]) {
@@ -628,16 +703,26 @@ class LiveDetectionViewModel: ObservableObject {
         
         currentTotalCount = totalCount
         maxHistoryValue = max(maxHistoryValue, totalCount)
+        
+        // Update current detections for live display
+        currentDetections = sortedCounts
     }
     
     private func updateCPUUsage() {
-        let usage = getCPUUsage()
-        currentCPUUsage = usage
-        cpuHistory.append(usage)
+        let cpuUsage = getCPUUsage()
+        currentCPUUsage = cpuUsage
+        cpuHistory.append(cpuUsage)
+        
+        let memoryUsage = getMemoryUsage()
+        currentMemoryUsage = memoryUsage
+        memoryHistory.append(memoryUsage)
         
         // Keep only last N entries
         if cpuHistory.count > maxHistoryEntries {
             cpuHistory.removeFirst()
+        }
+        if memoryHistory.count > maxHistoryEntries {
+            memoryHistory.removeFirst()
         }
         
         // Calculate dynamic Y-axis scale
@@ -645,26 +730,9 @@ class LiveDetectionViewModel: ObservableObject {
     }
     
     private func updateCPUScale() {
-        guard !cpuHistory.isEmpty else {
-            cpuMaxScale = 10.0
-            return
-        }
-        
-        let maxValue = cpuHistory.max() ?? 0.0
-        
-        // Smart scaling with nice round numbers
-        // Always show data in proper range for easy viewing
-        if maxValue <= 8 {
-            cpuMaxScale = 10.0
-        } else if maxValue <= 20 {
-            cpuMaxScale = 25.0
-        } else if maxValue <= 40 {
-            cpuMaxScale = 50.0
-        } else if maxValue <= 60 {
-            cpuMaxScale = 75.0
-        } else {
-            cpuMaxScale = 100.0
-        }
+        // Memory bars always show 0-100% (full height)
+        // So Y-axis should always be 100% to properly show both metrics
+        cpuMaxScale = 100.0
     }
     
     private func getCPUUsage() -> Double {
@@ -698,6 +766,25 @@ class LiveDetectionViewModel: ObservableObject {
         }
         
         return min(100.0, totalUsageOfCPU)
+    }
+    
+    private func getMemoryUsage() -> Double {
+        var taskInfo = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size) / 4
+        
+        let kerr: kern_return_t = withUnsafeMutablePointer(to: &taskInfo) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+            }
+        }
+        
+        if kerr == KERN_SUCCESS {
+            let usedMemory = Double(taskInfo.resident_size) / 1024.0 / 1024.0 // MB
+            let totalMemory = Double(ProcessInfo.processInfo.physicalMemory) / 1024.0 / 1024.0 // MB
+            return min(100.0, (usedMemory / totalMemory) * 100.0)
+        }
+        
+        return 0.0
     }
     
     private func cocoClassName(for classId: Int) -> String {

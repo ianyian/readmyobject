@@ -136,7 +136,7 @@ struct ContentView: View {
             
             Text(detectionMode.headerTitle)
                 .font(.system(size: 32, weight: .bold))
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
         }
         .padding(.top, 50)
     }

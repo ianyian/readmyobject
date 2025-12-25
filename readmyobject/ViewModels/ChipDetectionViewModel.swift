@@ -66,15 +66,15 @@ class ChipDetectionViewModel: ObservableObject {
             }
         }
         
-        // Load standard YOLOv8 model (yolov8n.mlpackage)
+        // Load standard YOLOv8 model (yolov8l.mlpackage)
         if standardModel == nil {
             do {
-                guard let standardModelURL = Bundle.main.url(forResource: "yolov8n", withExtension: "mlmodelc") else {
-                    print("⚠️ Standard YOLOv8 model (yolov8n.mlpackage) not found in Xcode project")
-                    print("   File exists at: customModel/yolov8n.mlpackage")
+                guard let standardModelURL = Bundle.main.url(forResource: "yolov8l", withExtension: "mlmodelc") else {
+                    print("⚠️ Standard YOLOv8 model (yolov8l.mlpackage) not found in Xcode project")
+                    print("   File exists at: yolov8l.mlpackage")
                     print("   ❌ You must ADD it to Xcode:")
                     print("   1. Right-click readmyobject folder in Xcode")
-                    print("   2. Add Files → Select yolov8n.mlpackage")
+                    print("   2. Add Files → Select yolov8l.mlpackage")
                     print("   3. Check 'Copy items if needed'")
                     print("   Using chip model as fallback (can only detect chips)")
                     return
@@ -82,7 +82,7 @@ class ChipDetectionViewModel: ObservableObject {
                 
                 let mlModel = try MLModel(contentsOf: standardModelURL, configuration: config)
                 standardModel = try VNCoreMLModel(for: mlModel)
-                print("✅ Loaded standard YOLOv8 model (yolov8n.mlpackage) - 80 COCO classes")
+                print("✅ Loaded standard YOLOv8-Large model (yolov8l.mlpackage) - 80 COCO classes")
             } catch {
                 print("❌ Failed to load standard model: \(error.localizedDescription)")
                 print("   Will use chip model as fallback")
@@ -90,36 +90,22 @@ class ChipDetectionViewModel: ObservableObject {
         }
         
         // Log which model is active
-        if detectionMode == .allObjects {
-            if chipModel != nil && standardModel != nil {
-                print("🎯 Using BOTH MODELS for All Objects detection")
-            } else if standardModel != nil {
-                print("🎯 Using STANDARD MODEL only for All Objects detection")
-            } else if chipModel != nil {
-                print("🎯 Using CHIP MODEL only for All Objects detection")
-            }
-        } else if detectionMode == .pokerChips {
-            print("🎯 Using CHIP MODEL for poker chips detection")
+        if detectionMode == .pokerChips {
+            print("🎯 Using CHIP MODEL ONLY for poker chips detection")
         } else if standardModel != nil {
-            print("🎯 Using STANDARD MODEL for \(detectionMode.displayName) detection")
+            print("🎯 Using STANDARD MODEL ONLY for \(detectionMode.displayName) detection")
         } else {
-            print("⚠️ Standard model not available, using chip model")
+            print("⚠️ Standard model not available, using chip model as fallback")
         }
     }
     
     /// Detect poker chips in the provided image
     func detectChips(in image: UIImage) {
-        // For "All Objects" mode, use both models
-        if detectionMode == .allObjects {
-            detectWithBothModels(in: image)
-            return
-        }
-        
         guard let model = model else {
             if detectionMode == .pokerChips {
                 errorMessage = "Poker chip model not loaded. Please add best.mlpackage to Xcode project."
             } else {
-                errorMessage = "Standard YOLOv8 model not found. Please add yolov8n.mlpackage to Xcode project to detect \(detectionMode.displayName.lowercased())."
+                errorMessage = "Standard YOLOv8-Large model not found. Please add yolov8l.mlpackage to Xcode project to detect \(detectionMode.displayName.lowercased())."
             }
             return
         }
@@ -171,96 +157,11 @@ class ChipDetectionViewModel: ObservableObject {
         }
     }
     
-    /// Detect using both models and combine results
-    private func detectWithBothModels(in image: UIImage) {
-        guard chipModel != nil || standardModel != nil else {
-            errorMessage = "No models loaded. Please add models to Xcode project."
-            return
-        }
-        
-        guard let ciImage = CIImage(image: image) else {
-            errorMessage = "Failed to convert image"
-            return
-        }
-        
-        isProcessing = true
-        errorMessage = nil
-        
-        let startTime = Date()
-        print("🔄 Running detection with BOTH models for All Objects mode")
-        
-        var allResults: [VNRecognizedObjectObservation] = []
-        let dispatchGroup = DispatchGroup()
-        
-        // Run standard model detection
-        if let standardModel = standardModel {
-            dispatchGroup.enter()
-            let standardRequest = VNCoreMLRequest(model: standardModel) { request, error in
-                defer { dispatchGroup.leave() }
-                
-                if let error = error {
-                    print("⚠️ Standard model error: \(error.localizedDescription)")
-                    return
-                }
-                
-                if let results = request.results as? [VNRecognizedObjectObservation] {
-                    print("✅ Standard model detected \(results.count) objects")
-                    allResults.append(contentsOf: results)
-                }
-            }
-            standardRequest.imageCropAndScaleOption = .scaleFill
-            
-            let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
-            Task {
-                do {
-                    try handler.perform([standardRequest])
-                } catch {
-                    print("❌ Standard model perform error: \(error.localizedDescription)")
-                    dispatchGroup.leave()
-                }
-            }
-        }
-        
-        // Run chip model detection
-        if let chipModel = chipModel {
-            dispatchGroup.enter()
-            let chipRequest = VNCoreMLRequest(model: chipModel) { request, error in
-                defer { dispatchGroup.leave() }
-                
-                if let error = error {
-                    print("⚠️ Chip model error: \(error.localizedDescription)")
-                    return
-                }
-                
-                if let results = request.results as? [VNRecognizedObjectObservation] {
-                    print("✅ Chip model detected \(results.count) objects")
-                    allResults.append(contentsOf: results)
-                }
-            }
-            chipRequest.imageCropAndScaleOption = .scaleFill
-            
-            let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
-            Task {
-                do {
-                    try handler.perform([chipRequest])
-                } catch {
-                    print("❌ Chip model perform error: \(error.localizedDescription)")
-                    dispatchGroup.leave()
-                }
-            }
-        }
-        
-        // Wait for both models to complete
-        dispatchGroup.notify(queue: .main) { [weak self] in
-            guard let self = self else { return }
-            
-            self.isProcessing = false
-            let processingTime = Date().timeIntervalSince(startTime)
-            
-            print("🎯 Combined results from both models: \(allResults.count) total detections")
-            self.processResults(allResults, for: image, processingTime: processingTime)
-        }
-    }
+    // REMOVED: detectWithBothModels - No longer merging models
+    // Each mode now uses only its appropriate model:
+    // - "All Objects" → YOLOv8 COCO standard model only
+    // - "Poker Chips" → Custom poker chip model only
+    // - Other modes → YOLOv8 COCO standard model only
     
     /// Process detection results and create Detection objects
     private func processResults(_ results: [VNRecognizedObjectObservation], for image: UIImage, processingTime: TimeInterval) {

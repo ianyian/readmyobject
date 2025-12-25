@@ -42,6 +42,36 @@ struct DetectionResultView: View {
                                 )
                             }
                         }
+                        
+                        // Label overlay (like live detection)
+                        if imageSize != .zero && !result.sortedLabelCounts.isEmpty {
+                            VStack {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        ForEach(result.sortedLabelCounts.prefix(5), id: \.label) { item in
+                                            HStack(spacing: 8) {
+                                                Text(item.label)
+                                                    .font(.caption.weight(.semibold))
+                                                Text("\(item.count)")
+                                                    .font(.caption.weight(.bold))
+                                                    .padding(.horizontal, 6)
+                                                    .padding(.vertical, 2)
+                                                    .background(Color.green)
+                                                    .cornerRadius(4)
+                                            }
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 10)
+                                            .padding(.vertical, 6)
+                                            .background(Color.black.opacity(0.7))
+                                            .cornerRadius(8)
+                                        }
+                                    }
+                                    .padding(.leading, 16)
+                                    Spacer()
+                                }
+                                Spacer()
+                            }
+                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -71,38 +101,6 @@ struct DetectionResultView: View {
                                     .stroke(Color.blue.opacity(0.3), lineWidth: 1)
                             )
                     )
-                    
-                    Divider()
-                    
-                    Text("Objects by Type")
-                        .font(.headline)
-                        .padding(.horizontal)
-                    
-                    // Display label counts for all detections
-                    ForEach(result.sortedLabelCounts, id: \.label) { item in
-                        HStack {
-                            Image(systemName: iconForLabel(item.label))
-                                .font(.title2)
-                                .foregroundColor(.blue)
-                                .frame(width: 30)
-                            
-                            Text(item.label)
-                                .font(.body)
-                            
-                            Spacer()
-                            
-                            Text("\(item.count)")
-                                .font(.title3.weight(.semibold))
-                                .foregroundColor(.blue)
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 8)
-                        .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.secondary.opacity(0.05))
-                        )
-                        .padding(.horizontal, 8)
-                    }
                     
                     Divider()
                     

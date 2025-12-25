@@ -401,8 +401,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Object Detector";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to capture photos for chip detection.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to analyze images for chip detection.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required to detect and count poker chips in real-time";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library access allows you to analyze poker chips in your existing photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -437,8 +437,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Object Detector";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to capture photos for chip detection.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to analyze images for chip detection.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required to detect and count poker chips in real-time";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library access allows you to analyze poker chips in your existing photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
