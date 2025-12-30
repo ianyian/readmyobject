@@ -126,7 +126,7 @@ struct AppearanceSettingsView: View {
                 } header: {
                     Text("Detection Confidence")
                 } footer: {
-                    Text("Higher confidence = stricter detection (fewer false positives). Lower confidence = more lenient (may detect non-chips). For accurate poker chip counting, use 95%.")
+                    Text("Higher confidence = stricter detection (fewer false positives). Lower confidence = more lenient (may detect non-chips). For accurate chip counting, use 95%.")
                 }
                 
                 Section {

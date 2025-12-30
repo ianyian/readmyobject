@@ -14,7 +14,7 @@ struct Detection: Identifiable, Equatable {
     let id = UUID()
     let boundingBox: CGRect
     let label: String  // The actual detected label from YOLO
-    let chipColor: ChipColor  // For backward compatibility with poker chips
+    let chipColor: ChipColor  // For backward compatibility with chips
     let confidence: Float
     
     static func == (lhs: Detection, rhs: Detection) -> Bool {
@@ -37,7 +37,7 @@ struct Detection: Identifiable, Equatable {
     }
 }
 
-/// Poker chip color types
+/// Chip color types for educational detection
 enum ChipColor: Int, CaseIterable {
     case black = 0
     case green = 1
@@ -55,10 +55,10 @@ enum ChipColor: Int, CaseIterable {
     
     var fullName: String {
         switch self {
-        case .black: return "Black poker chips"
-        case .green: return "Green poker chips"
-        case .red: return "Red poker chips"
-        case .whiteBlue: return "White-blue poker chips"
+        case .black: return "Black chips"
+        case .green: return "Green chips"
+        case .red: return "Red chips"
+        case .whiteBlue: return "White-blue chips"
         }
     }
     
@@ -105,7 +105,7 @@ struct DetectionResult: Equatable {
         detections.count
     }
     
-    /// Count chips by color (for poker chips mode)
+    /// Count chips by color (for chips mode)
     var chipCounts: [ChipColor: Int] {
         var counts: [ChipColor: Int] = [:]
         for color in ChipColor.allCases {

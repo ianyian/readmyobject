@@ -28,11 +28,11 @@ class ChipDetectionViewModel: ObservableObject {
         }
     }
     
-    private var chipModel: VNCoreMLModel?  // Custom poker chip model
+    private var chipModel: VNCoreMLModel?  // Custom chip model for education
     private var standardModel: VNCoreMLModel?  // Standard YOLOv8 COCO model
     
     private var model: VNCoreMLModel? {
-        // Use chip model only for poker chips mode
+        // Use chip model only for chips mode
         if detectionMode == .pokerChips {
             return chipModel
         }
@@ -49,18 +49,18 @@ class ChipDetectionViewModel: ObservableObject {
         let config = MLModelConfiguration()
         config.computeUnits = .all  // Use Neural Engine if available
         
-        // Load custom poker chip model (best.mlpackage)
+        // Load custom chip model (best.mlpackage)
         if chipModel == nil {
             do {
                 guard let chipModelURL = Bundle.main.url(forResource: "best", withExtension: "mlmodelc") else {
                     print("⚠️ Custom chip model (best.mlpackage) not found")
-                    errorMessage = "Poker chip model not found. Please add best.mlpackage to Xcode project."
+                    errorMessage = "Chip model not found. Please add best.mlpackage to Xcode project."
                     return
                 }
                 
                 let mlModel = try MLModel(contentsOf: chipModelURL, configuration: config)
                 chipModel = try VNCoreMLModel(for: mlModel)
-                print("✅ Loaded custom poker chip model (best.mlpackage)")
+                print("✅ Loaded custom chip model (best.mlpackage)")
             } catch {
                 print("❌ Failed to load chip model: \(error.localizedDescription)")
             }
@@ -91,7 +91,7 @@ class ChipDetectionViewModel: ObservableObject {
         
         // Log which model is active
         if detectionMode == .pokerChips {
-            print("🎯 Using CHIP MODEL ONLY for poker chips detection")
+            print("🎯 Using CHIP MODEL ONLY for chips detection")
         } else if standardModel != nil {
             print("🎯 Using STANDARD MODEL ONLY for \(detectionMode.displayName) detection")
         } else {
@@ -99,11 +99,11 @@ class ChipDetectionViewModel: ObservableObject {
         }
     }
     
-    /// Detect poker chips in the provided image
+    /// Detect chips in the provided image
     func detectChips(in image: UIImage) {
         guard let model = model else {
             if detectionMode == .pokerChips {
-                errorMessage = "Poker chip model not loaded. Please add best.mlpackage to Xcode project."
+                errorMessage = "Chip model not loaded. Please add best.mlpackage to Xcode project."
             } else {
                 errorMessage = "Standard YOLOv8-Large model not found. Please add yolov8l.mlpackage to Xcode project to detect \(detectionMode.displayName.lowercased())."
             }
@@ -160,7 +160,7 @@ class ChipDetectionViewModel: ObservableObject {
     // REMOVED: detectWithBothModels - No longer merging models
     // Each mode now uses only its appropriate model:
     // - "All Objects" → YOLOv8 COCO standard model only
-    // - "Poker Chips" → Custom poker chip model only
+    // - "Chips" → Custom chip model only (educational)
     // - Other modes → YOLOv8 COCO standard model only
     
     /// Process detection results and create Detection objects

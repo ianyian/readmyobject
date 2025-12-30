@@ -1,10 +1,12 @@
-# Privacy Policy for Object Detector Pro Max
+# Privacy Policy for my1314
 
-**Last Updated:** December 24, 2025
+**Last Updated:** December 31, 2025
 
 ## Introduction
 
-Object Detector Pro Max ("we", "our", or "the app") is committed to protecting your privacy. This Privacy Policy explains how our iOS application handles information.
+my1314 ("we", "our", or "the app") is an educational AI object detection application committed to protecting your privacy. This Privacy Policy explains how our iOS application handles information.
+
+**Educational Purpose:** This app is designed for learning and exploring YOLOv8 COCO object detection technology.
 
 ## Information Collection and Use
 
@@ -25,11 +27,11 @@ Object Detector Pro Max ("we", "our", or "the app") is committed to protecting y
 
 **All processing happens locally on your device:**
 
-1. **Camera Access**: The app accesses your device camera to capture real-time video for object detection. Camera feed is processed entirely on your device using Apple's Core ML framework.
+1. **Camera Access**: The app accesses your device camera to capture real-time video for educational object detection demonstrations. Camera feed is processed entirely on your device using Apple's Core ML framework.
 
-2. **Photo Library Access**: When you choose to detect objects in existing photos, the app accesses your photo library. Selected photos are processed locally on your device and never leave your device.
+2. **Photo Library Access**: When you choose to detect objects in existing photos for learning purposes, the app accesses your photo library. Selected photos are processed locally on your device and never leave your device.
 
-3. **On-Device ML Processing**: All machine learning inference runs locally using Core ML. The YOLOv8 models are embedded in the app and process data entirely on your device.
+3. **On-Device ML Processing**: All machine learning inference runs locally using Core ML. The YOLOv8 COCO models are embedded in the app for educational purposes and process data entirely on your device.
 
 4. **Settings Storage**: Your app preferences (detection mode, confidence threshold, theme) are stored locally using iOS UserDefaults. This data never leaves your device.
 
@@ -37,15 +39,15 @@ Object Detector Pro Max ("we", "our", or "the app") is committed to protecting y
 
 ### Camera Permission
 
-- **Purpose**: To capture real-time video for live object detection
-- **Usage**: Camera feed is processed on-device in real-time
+- **Purpose**: To capture real-time video for educational AI object detection demonstrations
+- **Usage**: Camera feed is processed on-device in real-time for learning purposes
 - **Storage**: Camera data is NOT stored or recorded
 - **Transmission**: Camera data is NEVER transmitted off your device
 
 ### Photo Library Permission
 
-- **Purpose**: To allow you to select photos for object detection
-- **Usage**: You select specific photos to analyze
+- **Purpose**: To allow you to select photos for educational object detection analysis
+- **Usage**: You select specific photos to analyze and learn from
 - **Storage**: Original photos remain in your library unchanged
 - **Transmission**: Photos are NEVER transmitted off your device
 
@@ -55,7 +57,7 @@ The app stores only the following information **locally on your device**:
 
 1. **User Preferences**:
 
-   - Selected detection mode (e.g., Poker Chips, Person, Car)
+   - Selected detection mode (e.g., Chips, Person, Car, etc.)
    - Confidence threshold setting (10%-95%)
    - Appearance theme (Light, Dark, System)
    - Live detection refresh rate (0.1-2.0s)
@@ -84,7 +86,7 @@ The app stores only the following information **locally on your device**:
 
 ## Children's Privacy
 
-This app does not collect any information from anyone, including children under 13. The app is rated 4+ and is safe for all ages.
+This educational app does not collect any information from anyone, including children under 13. The app is designed for learning about AI technology and is rated 4+, making it safe for all ages to explore object detection concepts.
 
 ## Changes to This Privacy Policy
 
@@ -141,12 +143,13 @@ Since no data is collected, transmitted, or stored externally, the app poses no 
 ✅ No analytics or tracking of any kind  
 ✅ No user accounts or personal information  
 ✅ Settings are stored locally only  
-✅ Complete privacy guaranteed
+✅ Complete privacy guaranteed  
+✅ Educational AI technology for learning purposes
 
-**You have complete control and privacy.** This app is designed to respect your privacy by operating entirely offline with all processing happening on your device.
+**You have complete control and privacy.** This educational app is designed to respect your privacy by operating entirely offline with all processing happening on your device.
 
 ---
 
-**Object Detector Pro Max** - Privacy-First Object Detection
+**my1314** - Privacy-First Educational AI Object Detection
 
-_Version 1.0.0 | December 24, 2025_
+_Version 1.0.0 | December 31, 2025_

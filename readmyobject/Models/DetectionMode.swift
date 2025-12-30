@@ -26,7 +26,7 @@ enum DetectionMode: String, CaseIterable, Identifiable {
     var displayName: String {
         switch self {
         case .allObjects: return "All Objects"
-        case .pokerChips: return "Poker Chips"
+        case .pokerChips: return "Chips"
         case .person: return "Person"
         case .car: return "Car"
         case .dog: return "Dog"
@@ -56,9 +56,9 @@ enum DetectionMode: String, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .allObjects:
-            return "Detects all objects trained in the YOLOv8 model including people, vehicles, animals, and poker chips."
+            return "Detects all objects trained in the YOLOv8 model including people, vehicles, animals, and chips."
         case .pokerChips:
-            return "Detects poker chips in four colors: Black, Green, Red, and White-Blue. Perfect for counting chips during games."
+            return "Detects chips in four colors: Black, Green, Red, and White-Blue. Educational demonstration of custom YOLOv8 model training."
         case .person:
             return "Detects people in images. Useful for counting people or identifying human presence."
         case .car:
@@ -81,7 +81,7 @@ enum DetectionMode: String, CaseIterable, Identifiable {
     var headerTitle: String {
         switch self {
         case .allObjects: return "Object Detector"
-        case .pokerChips: return "Poker Chip Detector"
+        case .pokerChips: return "Chip Detector"
         case .person: return "Person Detector"
         case .car: return "Car Detector"
         case .dog: return "Dog Detector"
@@ -96,7 +96,7 @@ enum DetectionMode: String, CaseIterable, Identifiable {
     var headerSubtitle: String {
         switch self {
         case .allObjects: return "Detect and identify multiple object types"
-        case .pokerChips: return "Detect and count poker chips by color"
+        case .pokerChips: return "Detect and count chips by color"
         case .person: return "Detect and count people in images"
         case .car: return "Detect and identify cars"
         case .dog: return "Detect dogs in images"

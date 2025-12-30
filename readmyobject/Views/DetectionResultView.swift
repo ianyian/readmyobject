@@ -130,7 +130,7 @@ struct DetectionResultView: View {
     private func iconForLabel(_ label: String) -> String {
         let lowerLabel = label.lowercased()
         
-        // Poker chips
+        // Chips
         if lowerLabel.contains("chip") || lowerLabel.contains("black") || 
            lowerLabel.contains("green") || lowerLabel.contains("red") || 
            lowerLabel.contains("white") || lowerLabel.contains("blue") {

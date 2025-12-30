@@ -1,6 +1,8 @@
-# Poker Chip Detector - iOS App
+# my1314 - iOS App
 
-A native iOS application that uses custom YOLOv8 machine learning model to detect and count poker chips by color in real-time.
+An educational iOS application that uses custom YOLOv8 machine learning model to demonstrate AI object detection and counting in real-time.
+
+**Educational Purpose:** This app is designed for learning and exploring YOLOv8 COCO object detection technology.
 
 ## 🎯 Features
 
@@ -13,12 +15,12 @@ A native iOS application that uses custom YOLOv8 machine learning model to detec
 - 📊 **Detailed Counts**: Total chips and breakdown by color
 - ⚡ **Fast Processing**: Optimized for iOS Neural Engine
 
-### Detected Chip Colors
+### Detected Chip Colors (Educational Model)
 
-- ⚫ **Black** poker chips
-- 🟢 **Green** poker chips
-- 🔴 **Red** poker chips
-- ⚪ **White-Blue** poker chips
+- ⚫ **Black** chips
+- 🟢 **Green** chips
+- 🔴 **Red** chips
+- ⚪ **White-Blue** chips
 
 ## 📱 Screenshots & UI
 
@@ -181,13 +183,15 @@ See [QUICK_START.md](QUICK_START.md) for 5-minute setup or [IOS_SETUP_GUIDE.md](
 
 ## 📊 Model Details
 
-### YOLOv8 Custom Model
+### YOLOv8 Custom Educational Model
 
-- **Trained on:** Custom poker chip dataset
+- **Purpose:** Educational demonstration of AI object detection
+- **Trained on:** Custom chip dataset for learning purposes
 - **Classes:** 4 (Black, Green, Red, White-Blue)
 - **Architecture:** YOLOv8 (Ultralytics)
 - **Accuracy:** ~90%+ mAP on validation set
 - **Confidence Threshold:** 0.5 (configurable)
+- **Technology:** YOLOv8 COCO-based detection
 
 See [MODEL_INFO.md](MODEL_INFO.md) for complete model documentation.
 
@@ -210,23 +214,25 @@ Use validation images from `data/valid/images/`:
 
 ## 🐛 Known Limitations
 
-- Overlapping chips may be counted as one
+- Overlapping objects may be counted as one
 - Very low lighting reduces accuracy
 - Extreme angles affect detection
-- Minimum chip size for detection
+- Minimum object size for detection
 - Best results with top-down view
+
+**Note:** This is an educational demonstration app for learning AI object detection concepts.
 
 ## 🔮 Future Enhancements
 
-### Planned Features
+### Planned Features (Educational Improvements)
 
 - [ ] Real-time video detection
 - [ ] Adjustable confidence slider
 - [ ] Save results to Photos
 - [ ] Export as CSV/JSON
-- [ ] Chip value calculation
+- [ ] Educational tutorials on AI detection
 - [ ] Detection history
-- [ ] Multiple denomination support
+- [ ] More object types support
 - [ ] Dark mode optimization
 - [ ] iPad specific layout
 - [ ] Share results feature
@@ -305,6 +311,6 @@ MIT License - See main [README.md](README.md)
 
 ---
 
-**Built with ❤️ for poker enthusiasts**
+**Built with ❤️ for AI learning and education**
 
-_Version 1.0 - December 24, 2025_
+_Version 1.0 - December 31, 2025_

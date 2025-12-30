@@ -1,6 +1,8 @@
-# Object Detector Pro Max - Support & Help
+# my1314 - Support & Help
 
-Welcome to Object Detector Pro Max support! This guide will help you get the most out of the app.
+Welcome to my1314 support! This guide will help you get the most out of the app.
+
+**Educational AI Object Detection App** - Learn and explore YOLOv8 COCO object detection technology.
 
 ## 📱 Quick Start Guide
 
@@ -15,7 +17,7 @@ Welcome to Object Detector Pro Max support! This guide will help you get the mos
 
 #### 🖼️ Take Photo to Detect
 
-**What it does:** Analyze existing photos from your library
+**What it does:** Analyze existing photos from your library using AI
 
 **How to use:**
 
@@ -30,7 +32,7 @@ Welcome to Object Detector Pro Max support! This guide will help you get the mos
 
 - Use clear, well-lit photos
 - Objects should be clearly visible
-- Works best with photos of poker chips
+- Works best with common objects (chips, people, cars, etc.)
 - Try different photos if detection isn't accurate
 
 #### 🎥 Live Detection
@@ -72,20 +74,20 @@ Welcome to Object Detector Pro Max support! This guide will help you get the mos
 Choose what type of objects to detect:
 
 - **All Objects** - Detect everything the model can recognize
-- **Poker Chips** - Custom model for accurate chip detection ⭐
+- **Chips** - Custom model for accurate chip detection ⭐
 - **Person** - Detect people only
 - **Car** - Detect cars only
 - **Dog, Cat, Bicycle, Motorcycle, Bird, Horse** - Specialized modes
 
-**Tip:** For poker chip counting, always use "Poker Chips" mode
+**Tip:** For chip counting, always use "Chips" mode. This educational app uses YOLOv8 COCO models for object detection.
 
 #### Minimum Confidence (Confidence Threshold)
 
 Controls detection accuracy:
 
-- **95% (Recommended for Poker Chips)** ⭐
+- **95% (Recommended for Chips)** ⭐
 
-  - Very strict, only counts obvious chips
+  - Very strict, only counts obvious objects
   - Minimizes false positives
   - Best for accurate counting
 
@@ -97,7 +99,7 @@ Controls detection accuracy:
 
 - **50-70%**
   - Lenient, detects more objects
-  - May count non-chips as chips
+  - May include more false positives
   - Use only if you're missing real objects
 
 **How it works:**
@@ -128,11 +130,12 @@ Controls how often live detection updates:
 
 ## 🎯 Best Practices
 
-### For Accurate Poker Chip Counting
+### For Accurate Object Counting
 
-1. **Use Poker Chips Mode** ✅
+1. **Use Appropriate Detection Mode** ✅
 
-   - Settings → Detection Mode → Poker Chips
+   - Settings → Detection Mode → Select your target object type
+   - Use "Chips" mode for counting chips
 
 2. **Set Confidence to 95%** ✅
 
@@ -140,20 +143,22 @@ Controls how often live detection updates:
 
 3. **Good Lighting** ✅
 
-   - Ensure chips are well-lit
+   - Ensure objects are well-lit
    - Avoid shadows and glare
    - Natural lighting works best
 
 4. **Clear View** ✅
 
-   - Keep chips visible in frame
-   - Don't overlap chips too much
+   - Keep objects visible in frame
+   - Minimize overlapping objects
    - Hold camera steady
 
 5. **Use Live Detection** ✅
    - More accurate than photo detection
    - Can adjust angle in real-time
    - Tap to pause and verify count
+
+**Educational Purpose:** This app demonstrates YOLOv8 COCO object detection capabilities for learning and experimentation.
 
 ### For Best Performance
 
@@ -169,7 +174,7 @@ Controls how often live detection updates:
 **Solution:**
 
 1. Go to iPhone Settings
-2. Scroll to "Object Detector Pro Max"
+2. Scroll to "my1314"
 3. Tap "Camera"
 4. Select "Allow"
 5. Restart app
@@ -179,7 +184,7 @@ Controls how often live detection updates:
 **Solution:**
 
 1. Go to iPhone Settings
-2. Scroll to "Object Detector Pro Max"
+2. Scroll to "my1314"
 3. Tap "Photos"
 4. Select "All Photos" or "Selected Photos"
 5. Restart app
@@ -191,7 +196,7 @@ Controls how often live detection updates:
 - ✓ Camera permission granted
 - ✓ Objects clearly visible
 - ✓ Good lighting
-- ✓ Correct detection mode selected
+- ✓ Correct detection mode selected (Chips mode for counting chips)
 - ✓ Confidence threshold not too high (try 85-90%)
 
 ### Too Many False Detections
@@ -200,10 +205,10 @@ Controls how often live detection updates:
 
 1. Open Settings
 2. Increase "Minimum Confidence" to 95%
-3. Ensure "Poker Chips" mode is selected
+3. Ensure correct detection mode is selected (e.g., "Chips" mode)
 4. Improve lighting conditions
 
-### Missing Real Chips
+### Missing Real Objects
 
 **Solution:**
 
@@ -239,13 +244,17 @@ Controls how often live detection updates:
 
 ## ❓ Frequently Asked Questions
 
+### What is this app for?
+
+**Educational AI Detection.** This app demonstrates YOLOv8 COCO object detection technology for learning purposes. It helps users understand how AI-powered object detection works in real-time.
+
 ### Does the app store my photos?
 
 **No.** All photos stay on your device. Nothing is uploaded or stored.
 
 ### Does it work offline?
 
-**Yes.** All processing happens on your device. No internet required.
+**Yes.** All processing happens on your device using Core ML. No internet required.
 
 ### What phones are supported?
 
@@ -255,12 +264,12 @@ iPhone running iOS 15.0 or later. iPad is also supported.
 
 Not in version 1.0. This feature is planned for future updates.
 
-### Why are some chips not detected?
+### Why are some objects not detected?
 
 - Confidence threshold too high (lower it in settings)
 - Poor lighting
-- Chips too far from camera
-- Chips partially obscured
+- Objects too far from camera
+- Objects partially obscured
 
 ### Can it count other objects?
 
@@ -268,7 +277,7 @@ Yes! Change detection mode in settings. Works with 10 different object types.
 
 ### How accurate is the counting?
 
-With proper setup (95% confidence, good lighting, Poker Chips mode), accuracy is typically 95%+.
+With proper setup (95% confidence, good lighting, appropriate detection mode), accuracy is typically 90-95%+ depending on conditions. This app uses YOLOv8 COCO models for educational demonstration of AI object detection.
 
 ## 📊 Understanding the Live Detection Charts
 
@@ -332,24 +341,24 @@ Tell us what you'd like to see!
 
 ## 🎓 Tips & Tricks
 
-### Pro Tips for Poker Players
+### Learning AI Object Detection
 
-1. **Pre-game Setup**
+1. **Getting Started**
 
-   - Calibrate: Test with your actual chips
-   - Adjust confidence until count is accurate
-   - Save settings for next time
+   - Experiment with different objects to see how AI detection works
+   - Adjust confidence settings to understand detection thresholds
+   - Compare different detection modes
 
-2. **During Game**
+2. **Understanding Results**
 
-   - Use live detection for quick counts
-   - Tap to pause when count looks right
-   - Take a photo if you need a record
+   - Use live detection to see real-time AI processing
+   - Tap to pause and examine detection accuracy
+   - Take photos to analyze detection patterns
 
-3. **Stack Valuation**
-   - Count each color separately
-   - Use photo detection for permanent record
-   - Double-check with manual count first time
+3. **Educational Exploration**
+   - Try detecting different object types
+   - Learn how lighting affects AI accuracy
+   - Experiment with YOLOv8 COCO model capabilities
 
 ### Hidden Features
 
@@ -385,6 +394,6 @@ Can't find your answer? Contact us:
 
 ---
 
-**Object Detector Pro Max** - AI-Powered Object Detection
+**my1314** - Educational AI Object Detection with YOLOv8 COCO
 
-_Version 1.0.0 | Last Updated: December 24, 2025_
+_Version 1.0.0 | Last Updated: December 31, 2025_

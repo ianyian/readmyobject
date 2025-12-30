@@ -658,7 +658,7 @@ class LiveDetectionViewModel: ObservableObject {
     // REMOVED: detectWithBothModels - No longer merging models
     // Each mode now uses only its appropriate model:
     // - "All Objects" → YOLOv8 COCO standard model only
-    // - "Poker Chips" → Custom poker chip model only
+    // - "Chips" → Custom chip model only (educational)
     // - Other modes → YOLOv8 COCO standard model only
     
     @MainActor
