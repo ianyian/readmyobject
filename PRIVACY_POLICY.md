@@ -1,10 +1,10 @@
-# Privacy Policy for Poker Chip Counter
+# Privacy Policy for Object Detector Pro Max
 
 **Last Updated:** December 24, 2025
 
 ## Introduction
 
-Poker Chip Counter ("we", "our", or "the app") is committed to protecting your privacy. This Privacy Policy explains how our iOS application handles information.
+Object Detector Pro Max ("we", "our", or "the app") is committed to protecting your privacy. This Privacy Policy explains how our iOS application handles information.
 
 ## Information Collection and Use
 
@@ -147,6 +147,6 @@ Since no data is collected, transmitted, or stored externally, the app poses no 
 
 ---
 
-**Poker Chip Counter** - Privacy-First Object Detection
+**Object Detector Pro Max** - Privacy-First Object Detection
 
 _Version 1.0.0 | December 24, 2025_

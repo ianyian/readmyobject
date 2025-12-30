@@ -1,6 +1,6 @@
-# Poker Chip Counter - Support & Help
+# Object Detector Pro Max - Support & Help
 
-Welcome to Poker Chip Counter support! This guide will help you get the most out of the app.
+Welcome to Object Detector Pro Max support! This guide will help you get the most out of the app.
 
 ## 📱 Quick Start Guide
 
@@ -169,7 +169,7 @@ Controls how often live detection updates:
 **Solution:**
 
 1. Go to iPhone Settings
-2. Scroll to "Poker Chip Counter"
+2. Scroll to "Object Detector Pro Max"
 3. Tap "Camera"
 4. Select "Allow"
 5. Restart app
@@ -179,7 +179,7 @@ Controls how often live detection updates:
 **Solution:**
 
 1. Go to iPhone Settings
-2. Scroll to "Poker Chip Counter"
+2. Scroll to "Object Detector Pro Max"
 3. Tap "Photos"
 4. Select "All Photos" or "Selected Photos"
 5. Restart app
@@ -385,6 +385,6 @@ Can't find your answer? Contact us:
 
 ---
 
-**Poker Chip Counter** - AI-Powered Object Detection
+**Object Detector Pro Max** - AI-Powered Object Detection
 
 _Version 1.0.0 | Last Updated: December 24, 2025_
